@@ -6,20 +6,47 @@ class CustomerAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name',)
 admin.site.register(Customer, CustomerAdmin)
 
-admin.site.register(Wallet)
+class WalletAdmin(admin.ModelAdmin):
+    list_display = ('User_id','balance','status','time',)
+    search_fields = ('status','User_id',)
+admin.site.register(Wallet, WalletAdmin)
 
-admin.site.register(Account)
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ('account_name','account_type','account_number','wallet',)
+    search_fields = ('account_number','account_name',)
+admin.site.register(Account, AccountAdmin)
 
-admin.site.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ('transaction_code','transaction_type','transaction_time','transaction_fee',)
+    search_fields = ('transaction_code','transaction_time',)
+admin.site.register(Transaction, TransactionAdmin)
 
-admin.site.register(Card)
+class CardAdmin(admin.ModelAdmin):
+    list_display = ('card_name','card_type','card_issuer','cvv_code','date_issued',)
+    search_fields = ('card_issuer','card_name',)
+admin.site.register(Card, CardAdmin)
 
-admin.site.register(ThirdParty)
+class ThirdPartyAdmin(admin.ModelAdmin):
+    list_display = ('party_name','party_id','account','phone_number',)
+    search_fields = ('party_name','party_id',)
+admin.site.register(ThirdParty, ThirdPartyAdmin)
 
-admin.site.register(Notifications)
+class NotificationsAdmin(admin.ModelAdmin):
+    list_display = ('customer_name','notification_date_time','notification_status','recipient',)
+    search_fields = ('customer_name','notification_date_time',)
+admin.site.register(Notifications, NotificationsAdmin)
 
-admin.site.register(Receipt)
+class ReceiptAdmin(admin.ModelAdmin):
+    list_display = ('receipt_type','receipt_date','account_number','receipt_file','total_amount',)
+    search_fields = ('receipt_type','receipt_date',)
+admin.site.register(Receipt, ReceiptAdmin)
 
-admin.site.register(Loan)
+class LoanAdmin(admin.ModelAdmin):
+    list_display = ('loan_type','loan_amount','loan_date','interest_rate','loan_due_date',)
+    search_fields = ('loan_type','loan_amount',)
+admin.site.register(Loan, LoanAdmin)
 
-admin.site.register(Reward)
+class RewardAdmin(admin.ModelAdmin):
+    list_display = ('reward_date','customer_id','reward_points','transaction',)
+    search_fields = ('reward_date','reward_points',)
+admin.site.register(Reward, RewardAdmin)
