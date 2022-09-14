@@ -1,0 +1,21 @@
+<table>
+    <th>
+        <td>Receipt Type</td>
+        <td>Account No.</td>
+        <td>Total Amount</td>
+        <td>receipt_date</td>
+        <td>receipt_file</td>
+        <td>transaction</td>
+    </th>
+    
+    {% for reciepts in reciepts%}
+    <tr>
+        <td>{{reciepts.receipt_type}}</td>
+        <td>{{reciepts.account_number}}</td>
+        <td>{{reciepts.total_amount}}</td>
+        <td>{{reciepts.receipt_date}}</td>
+        <td>{{reciepts.receipt_file}}</td>
+        <td>{{reciepts.transaction}}</td>
+    </tr>
+    {% endfor %}
+</table>

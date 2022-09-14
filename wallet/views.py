@@ -1,52 +1,154 @@
 from django.shortcuts import render
+
+from wallet.forms import WalletInformation
+from .models import Customer, Notifications, Receipt, Wallet
+from . import forms
 # Create your views here.
 
-def register_customer(request):
+def register_customer(request):  #1
     from .forms import CustomerRegistrationForm
-    form = CustomerRegistrationForm()
+    if request.method == 'POST':
+        form = CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = CustomerRegistrationForm()
     return render(request,"wallet/register_customer.html",{"form": form})
 
-def wallet_information(request):
-    from .forms import WalletInformation
-    form = WalletInformation()
+def list_customers(request):
+    customers = Customer.objects.all()
+    return render(request,"wallet/list_customers.html",{"customers":customers})
+
+
+def wallet_information(request):   #2
+    # from .forms import WalletInformation
+    if request.method == 'POST':
+        form = forms.WalletInformation()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.WalletInformation()
     return render(request,"wallet/wallet_information.html",{"form":form})
 
-def account_details(request):
-    from .forms import AccountDetails
-    form = AccountDetails()
+def list_wallet_information(request):
+    wallets = Wallet.objects.all()
+    return render(request,"wallet/list_wallet_information.html",{"wallets":wallets})
+
+
+def account_details(request):   #3
+    # from .forms import AccountDetails
+    if request.method == 'POST':
+        form = forms.AccountDetails()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.AccountDetails()
     return render(request,"wallet/account_details.html",{"form":form})
 
-def transaction_details(request):
-    from .forms import TransactionDetails
-    form = TransactionDetails()
+def list_accounts(request):
+    accounts = forms.Account.objects.all()
+    return render(request,"wallet/list_accounts.html",{"accounts":accounts})
+
+
+def transaction_details(request):  #4
+    # from .forms import TransactionDetails
+    if request.method == 'POST':
+        form = forms.TransactionDetails()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.TransactionDetails()
     return render(request,"wallet/transaction_details.html",{"form":form})
 
-def card_details(request):
-    from .forms import CustomerCardDetails
-    form = CustomerCardDetails()
+def list_transactions(request):
+    transactions = forms.Transaction.objects.all()
+    return render(request,"wallet/list_transactions.html",{"transactions":transactions})
+
+
+def card_details(request):  #5
+    # from .forms import CustomerCardDetails
+    if request.method == 'POST':
+        form = forms.CustomerCardDetails()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.CustomerCardDetails()
     return render(request,"wallet/card_details.html",{"form":form})
 
-def third_party_details(request):
-    from .forms import ThirdPartyDetails
-    form = ThirdPartyDetails()
+def list_cards(request):
+    cards = forms.Card.objects.all()
+    return render(request,"wallet/list_cards.html",{"cards":cards})
+
+
+def third_party_details(request):   #6
+    # from .forms import ThirdPartyDetails
+    if request.method == "POST":
+        form = forms.ThirdPartyDetails()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.ThirdPartyDetails()
     return render(request,"wallet/third_party_details.html",{"form":form})
 
-def notify_customer(request):
-    from .forms import CustomerNotifications
-    form = CustomerNotifications()
+def list_third_party(request): 
+    third_parties = forms.ThirdParty.objects.all()
+    return render(request,"wallet/list_third_party.html",{"third_parties":third_parties})
+
+def notify_customer(request):  #7
+    # from .forms import CustomerNotifications
+    if request.method == "POST":
+        form = forms.CustomerNotifications()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.CustomerNotifications()
     return render(request,"wallet/notify_customer.html",{"form":form})
 
-def recieve_reciept(request):
-    from .forms import TransactionReciept
-    form = TransactionReciept()
+def list_notifications(request):
+    notification = Notifications.objects.all()
+    return render(request,"wallet/list_notifications.html",{"notifications":notification})
+
+def recieve_reciept(request):   #8
+    # from .forms import TransactionReciept
+    if request.method == "POST":
+        form = forms.TransactionReciept()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.TransactionReciept()
     return render(request,"wallet/recieve_reciept.html",{"form":form})
 
-def loan_details(request):
-    from .forms import LoanDetails
-    form = LoanDetails()
+def list_reciepts(request):
+    reciepts = Receipt.objects.all()
+    return render(request,"wallet/list_reciepts.html",{"reciepts":reciepts})
+
+
+
+def loan_details(request):  #9
+    # from .forms import LoanDetails
+    if request.method == "POST":
+        form = forms.LoanDetails()
+        if form.is_valid():
+            user = form.save()
+    else:
+        form = forms.LoanDetails()
     return render(request,"wallet/loan_details.html",{"form":form})
 
-def customer_reward(request):
-    from .forms import CustomerReward
-    form = CustomerReward()
+def list_loans(request):
+    loans = forms.Loan.objects.all()
+    return render(request,"wallet/list_loans.html",{"loans":loans})
+
+
+def customer_reward(request):   #10
+    # from .forms import CustomerReward
+    if request.method == "POST":
+        form = forms.CustomerReward()
+        if form.is_valid():
+            form.save()
+    else:
+        form = forms.CustomerReward()
     return render(request,"wallet/customer_reward.html",{"form":form})
+
+def list_reward(request):
+    rewards = forms.Reward.objects.all()
+    return render(request,"wallet/list_reward.html",{"rewards":rewards})

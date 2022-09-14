@@ -1,0 +1,29 @@
+<table>
+    <th>
+        <td>loan_number</td>
+        <td>loan_type</td>
+        <td>loan_amount</td>
+        <td>loan_date</td>
+        <td>wallet</td>
+        <td>interest_rate</td>
+        <td>loan_guaranter</td>
+        <td>loan_due_date</td>
+        <td>loan_balance</td>
+        <td>loan_term</td>
+    </th>
+    
+    {% for loans in loans %}
+    <tr>
+        <td>{{loans.loan_number}}</td>
+        <td>{{loans.loan_type}}</td>
+        <td>{{loans.loan_amount}}</td>
+        <td>{{loans.loan_date}}</td>
+        <td>{{loans.wallet}}</td>
+        <td>{{loans.interest_rate}}</td>
+        <td>{{loans.loan_guaranter}}</td>
+        <td>{{loans.loan_due_date}}</td>
+        <td>{{loans.loan_balance}}</td>
+        <td>{{loans.loan_term}}</td>
+    </tr>
+    {% endfor %}
+</table>

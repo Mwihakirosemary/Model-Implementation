@@ -16,7 +16,7 @@ class Customer(models.Model):
     age = models.PositiveBigIntegerField()
     id_number = models.CharField(max_length= 15,null=True)
     nationality = models.CharField(max_length= 15,null=True)
-    profile_picture = models.ImageField(upload_to= 'profile_picture/',null=True)
+    # profile_picture = models.ImageField(upload_to= 'profile_picture/',null=True)
 
 class Wallet(models.Model):
     User_id = models.IntegerField()

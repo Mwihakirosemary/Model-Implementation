@@ -1,0 +1,19 @@
+<table>
+    <th>
+        <td>Customer Name</td>
+        <td>Customer Id</td>
+        <td>Notification date</td>
+        <td>Recipient</td>
+        <td>Notification Status</td>
+    </th>
+    
+    {% for notification in notifications%}
+    <tr>
+        <td>{{notification.customer_name}}</td>
+        <td>{{notification.customer_id}}</td>
+        <td>{{notification.notification_date_time}}</td>
+        <td>{{notification.recipient}}</td>
+        <td>{{notification.notification_status}}</td>
+    </tr>
+    {% endfor %}
+</table>

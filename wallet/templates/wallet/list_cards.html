@@ -1,0 +1,29 @@
+<table>
+    <th>
+        <td>Card Name</td>
+        <td>Card No.</td>
+        <td>Card Type</td>
+        <td>CVV Code</td>
+        <td>Card Issuer</td>
+        <td>Date Issued</td>
+        <td>Expiry Date</td>
+        <td>Wallet</td>
+        <td>Account</td>
+        <td>Card Status</td>
+    </th>
+    
+    {% for cards in cards %}
+    <tr>
+        <td>{{cards.card_name}}</td>
+        <td>{{cards.card_number}}</td>
+        <td>{{cards.card_type}}</td>
+        <td>{{cards.cvv_code}}</td>
+        <td>{{cards.card_issuer}}</td>
+        <td>{{cards.date_issued}}</td>
+        <td>{{cards.expiry_date}}</td>
+        <td>{{cards.wallet}}</td>
+        <td>{{cards.account}}</td>
+        <td>{{cards.card_status}}</td>
+    </tr>
+    {% endfor %}
+</table>
