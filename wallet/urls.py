@@ -1,7 +1,6 @@
 # from unicodedata import name
 from django.urls import path
 from . import views
-# from .views import account_details, card_details, customer_reward, loan_details, notify_customer, recieve_reciept, register_customer, third_party_details, transaction_details, wallet_information
 
 urlpatterns = [
     path("register/",views.register_customer, name ="registration"),

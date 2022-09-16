@@ -1,7 +1,4 @@
 from django.shortcuts import render
-
-from wallet.forms import WalletInformation
-from .models import Customer, Notifications, Receipt, Wallet
 from . import forms
 # Create your views here.
 
@@ -16,12 +13,11 @@ def register_customer(request):  #1
     return render(request,"wallet/register_customer.html",{"form": form})
 
 def list_customers(request):
-    customers = Customer.objects.all()
+    customers = forms.Customer.objects.all()
     return render(request,"wallet/list_customers.html",{"customers":customers})
 
 
 def wallet_information(request):   #2
-    # from .forms import WalletInformation
     if request.method == 'POST':
         form = forms.WalletInformation()
         if form.is_valid():
@@ -31,12 +27,11 @@ def wallet_information(request):   #2
     return render(request,"wallet/wallet_information.html",{"form":form})
 
 def list_wallet_information(request):
-    wallets = Wallet.objects.all()
+    wallets = forms.Wallet.objects.all()
     return render(request,"wallet/list_wallet_information.html",{"wallets":wallets})
 
 
 def account_details(request):   #3
-    # from .forms import AccountDetails
     if request.method == 'POST':
         form = forms.AccountDetails()
         if form.is_valid():
@@ -51,7 +46,6 @@ def list_accounts(request):
 
 
 def transaction_details(request):  #4
-    # from .forms import TransactionDetails
     if request.method == 'POST':
         form = forms.TransactionDetails()
         if form.is_valid():
@@ -66,7 +60,6 @@ def list_transactions(request):
 
 
 def card_details(request):  #5
-    # from .forms import CustomerCardDetails
     if request.method == 'POST':
         form = forms.CustomerCardDetails()
         if form.is_valid():
@@ -81,7 +74,6 @@ def list_cards(request):
 
 
 def third_party_details(request):   #6
-    # from .forms import ThirdPartyDetails
     if request.method == "POST":
         form = forms.ThirdPartyDetails()
         if form.is_valid():
@@ -95,7 +87,6 @@ def list_third_party(request):
     return render(request,"wallet/list_third_party.html",{"third_parties":third_parties})
 
 def notify_customer(request):  #7
-    # from .forms import CustomerNotifications
     if request.method == "POST":
         form = forms.CustomerNotifications()
         if form.is_valid():
@@ -105,11 +96,10 @@ def notify_customer(request):  #7
     return render(request,"wallet/notify_customer.html",{"form":form})
 
 def list_notifications(request):
-    notification = Notifications.objects.all()
+    notification = forms.Notifications.objects.all()
     return render(request,"wallet/list_notifications.html",{"notifications":notification})
 
 def recieve_reciept(request):   #8
-    # from .forms import TransactionReciept
     if request.method == "POST":
         form = forms.TransactionReciept()
         if form.is_valid():
@@ -119,13 +109,12 @@ def recieve_reciept(request):   #8
     return render(request,"wallet/recieve_reciept.html",{"form":form})
 
 def list_reciepts(request):
-    reciepts = Receipt.objects.all()
+    reciepts = forms.Receipt.objects.all()
     return render(request,"wallet/list_reciepts.html",{"reciepts":reciepts})
 
 
 
 def loan_details(request):  #9
-    # from .forms import LoanDetails
     if request.method == "POST":
         form = forms.LoanDetails()
         if form.is_valid():
@@ -140,7 +129,6 @@ def list_loans(request):
 
 
 def customer_reward(request):   #10
-    # from .forms import CustomerReward
     if request.method == "POST":
         form = forms.CustomerReward()
         if form.is_valid():
