@@ -17,6 +17,8 @@
             <th scope="col">Account Type</th>
             <th scope="col">Balance</th>
             <th scope="col">Wallet</th>
+            <th>View Account</th>
+
         </th>
         
         {% for account in accounts %}
@@ -26,6 +28,7 @@
             <td>{{account.account_type}}</td>
             <td>{{account.balance}}</td>
             <td>{{account.wallet}}</td>
+            <td><a href="{% url 'account_profile' id=account.id %}">Account</a></td>
    </tr>
    {% endfor %}
 </table>

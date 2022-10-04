@@ -20,6 +20,7 @@
                 <th scope="col">Time</th>
                 <th scope="col">History</th>
                 <th scope="col">Pin</th>
+                <th>View Wallet</th>
             
             {% for wallet in wallets%}
             <tr>
@@ -30,6 +31,7 @@
                 <td>{{wallet.time}}</td>
                 <td>{{wallet.history}}</td>
                 <td>{{wallet.pin}}</td>
+                <td><a href="{% url 'wallet_details' id=wallet.id %}">Wallet</a></td>
    </tr>
    {% endfor %}
 </table>

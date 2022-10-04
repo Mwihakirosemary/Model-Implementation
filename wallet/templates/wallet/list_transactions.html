@@ -22,6 +22,7 @@
             <th scope="col">Origin Acc.</th>
             <th scope="col">Destination Acc.</th>
             <th scope="col">Trans. Type</th>
+            <th>View Transaction</th>
         </th>
         
         {% for transaction in transactions %}
@@ -35,6 +36,7 @@
             <td>{{transaction.origin_account}}</td>
             <td>{{transaction.destination_account }}</td>
             <td>{{transaction.transaction_type}}</td>
+            <td><a href="{% url 'transaction_display' id=transaction.id %}">Wallet</a></td>
    </tr>
    {% endfor %}
 </table>

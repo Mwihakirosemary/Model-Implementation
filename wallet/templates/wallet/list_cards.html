@@ -22,6 +22,7 @@
        <th scope="col">Wallet</th>
        <th scope="col">Account</th>
        <th scope="col">Card Status</th>
+       <th>View Card</th>
  
  
   
@@ -37,6 +38,7 @@
        <td>{{cards.wallet}}</td>
        <td>{{cards.account}}</td>
        <td>{{cards.card_status}}</td>
+       <td><a href="{% url 'card_display' id=card.id %}">Profile</a></td>
    </tr>
    {% endfor %}
 </table>

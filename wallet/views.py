@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from ast import If
+from django.shortcuts import render, redirect
 from . import forms
+from . import models
 # Create your views here.
 
 def register_customer(request):  #1
@@ -140,3 +142,104 @@ def customer_reward(request):   #10
 def list_reward(request):
     rewards = forms.Reward.objects.all()
     return render(request,"wallet/list_reward.html",{"rewards":rewards})
+
+
+def customer_profile(request, id):
+    customers = models.Customer.objects.get(id=id)
+    return render(request,"wallet/customer_profile.html",{"customers":customers})
+
+
+def edit_customer_profile(request, id):
+    customer = models.Customer.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.CustomerRegistrationForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect("customer_profile",  id=customer.id)
+    else:
+        form = forms.CustomerRegistrationForm(instance=customer)
+        return render(request,"wallet/edit_customer_profile.html",{"form":form})
+
+
+
+def account_profile(request, id):
+    accounts = models.Account.objects.get(id=id)
+    return render(request,"wallet/account_profile.html",{"accounts":accounts})
+
+def edit_wallet_accounts(request,id):
+    account= models.Account.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.AccountDetails(request.POST,instance=account)
+        if form.is_valid():
+            form.save()
+            return redirect("account_profile",  id=account.id)
+    else:
+        form = forms.AccountDetails(instance=account)
+        return render(request, "wallet/edit_wallet_accounts.html",{"form":form})
+
+
+def wallet_details(request, id):
+    wallets = models.Wallet.objects.get(id=id)
+    return render(request, "wallet/wallet_details.html", {"wallets":wallets})
+
+def edit_wallet_details(request, id):
+    wallet = models.Wallet.objects.get(id=id)
+    if request.method == "POST":
+        form = forms.WalletInformation(request.POST, instance=wallet)
+        if form.is_valid():
+            form.save()
+            return redirect("wallet_details", id=wallet.id)
+    else:
+        form = forms.WalletInformation(instance=wallet)
+        return render(request, "wallet/edit_wallet_details.html", {"form": form})
+
+def card_display(request, id):
+    cards = models.Card.objects.get(id=id)
+    return render(request, "wallet/card_display.html", {"cards": cards})
+
+def edit_card(request, id):
+    card = models.Card.objects.get(id=id)
+    if request.method == "POST":
+        form = forms.CustomerCardDetails(request.POST,instance=card)
+        if form.is_valid():
+            form.save()
+            return redirect("card_display",  id=card.id)
+    else:
+        form = forms.CustomerCardDetails(instance=card)
+        return render(request,"wallet/edit_card.html",{"form":form})
+        
+
+def transaction_display(request,id):
+    transactions = models.Transaction.objects.get(id=id)
+    return render(request,"wallet/transaction_display.html",{"transactions":transactions})
+
+def edit_transaction(request,id):
+    transaction = models.Transaction.objects.get(id=id)
+    if request.method == "POST":
+        form = forms.TransactionDetails(request.POST, instance=transaction)
+        if form.is_valid():
+            form.save()
+            return redirect("transaction_display",  id=transaction.id)
+    else:
+        form = forms.TransactionDetails(instance=transaction)
+        return render(request,"wallet/edit_transaction.html",{"form":form})
+
+
+def reciept_display(request,id):
+    reciepts = models.Receipt.objects.get(id=id)
+    return render(request,"wallet/reciept_display.html",{"reciepts":reciepts})
+
+def edit_reciept(request,id):
+    reciept = models.Receipt.objects.get(id=id)
+    if request.method == "POST":
+        form = forms.TransactionReciept(request.POST,instance=reciept)
+        if form.is_valid():
+            form.save()
+            return redirect("receipt_display",  id=reciept.id)
+
+    else:
+        form = forms.TransactionReciept(instance=reciept)
+        return render(request,"wallet/edit_reciept.html",{"form":form})
+
+
+        

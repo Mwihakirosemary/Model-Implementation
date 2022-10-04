@@ -22,6 +22,8 @@
             <th scope="col">Id No.</th>
             <th scope="col">Address</th>
             <th scope="col">Nationality</th>
+            <th>View Profile</th>
+            
         </th>
         
         {% for customer in customers %}
@@ -35,8 +37,12 @@
             <td>{{customer.id_number}}</td>
             <td>{{customer.address}}</td>
             <td>{{customer.nationality}}</td>
+            <td><a href="{% url 'customer_profile' id=customer.id %}">Profile</a></td>
+
    </tr>
    {% endfor %}
+
+
 </table>
 
     </table>

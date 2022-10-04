@@ -19,6 +19,7 @@
             <th scope="col">receipt_date</th>
             <th scope="col">receipt_file</th>
             <th scope="col">transaction</th>
+            <th>View Reciept</th>
         </th>
         
         {% for reciepts in reciepts%}
@@ -29,6 +30,7 @@
             <td>{{reciepts.receipt_date}}</td>
             <td>{{reciepts.receipt_file}}</td>
             <td>{{reciepts.transaction}}</td>
+            <td><a href="{% url 'reciept_display' id=reciept.id %}">Reciept</a></td>
    </tr>
    {% endfor %}
 </table>
