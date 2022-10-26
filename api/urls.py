@@ -13,4 +13,12 @@ router.register(r"receipts",views.ReceiptViewSet)
 router.register(r"notifications",views.NotificationsViewSet)
 
 
-urlpatterns = [path("",include(router.urls)),]
+urlpatterns = [
+    path("",include(router.urls)),
+    path("deposit/", views.AccountDepositView.as_view(), name="deposit-view"),
+    path("transfer/", views.AccountTransferView.as_view(), name="transfer-view"),
+    path("withdraw/", views.AccountWithdrawView.as_view(), name="withdraw-view"),
+    path("requestLoan/", views.AccountRequestLoanView.as_view(), name="loan-rquest-view"),
+    path("repay_loan/", views.AccountRepayLoanView.as_view(), name="loan-repay-view"),
+    path("buy_airtime/", views.AccountBuyAirtimeView.as_view(), name="airtime-view"),
+]

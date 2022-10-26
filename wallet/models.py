@@ -39,6 +39,96 @@ class Account(models.Model):
     account_type = models.CharField(max_length= 15, choices= ACCOUNTTYPE_CHOICES)
     balance = models.IntegerField()
     wallet = models.ForeignKey("Wallet",on_delete= models.CASCADE, related_name= "account_wallet")
+
+    # Account Deposit
+    def deposit(self, amount):
+        if amount <= 0:
+            message =  "Invalid amount"
+            status = 403
+        else:
+            self.balance += amount
+            self.save()
+            message = f"You have deposited {amount}, your new balance is {self.balance}"
+            status = 200
+        return message, status
+
+    # Account Transfer
+    def transfer(self, destination, amount):
+        if amount <= 0:
+            message =  "Invalid amount"
+            status = 403
+      
+        elif amount < self.balance:
+            message =  "Insufficient balance"
+            status = 403
+      
+        else:
+            self.balance -= amount
+            self.save()
+            destination.deposit(amount)
+            message = f"You have transfered {amount}, your new balance is {self.balance}"
+            status = 200
+        return message, status
+
+    # Account Withdrawal
+    def withdraw(self, amount):
+        if amount <= 0:
+            message =  "Invalid amount"
+            status = 403
+      
+        elif amount < self.balance:
+            message =  "Insufficient balance"
+            status = 403
+
+        else:
+            self.balance -= amount
+            self.save()
+            message = f"You have withdrawn {amount}, your new balance is {self.balance}"
+            status = 200
+        return message, status
+
+    # Account Request Loan
+    def requestLoan(self, amount):
+        if amount <= 0:
+            message = "Invalid amount"
+            status = 403
+        
+        else:
+            self.balance -= amount
+            self.save()
+            message = f"Dear {self.account_name} your loan of ksh{amount} has been granted successfully"
+            status = 200
+        return message, status
+
+        # Account Buy Airtime
+    def buy_airtime(self, amount):
+        if amount <= 0:
+            message = "Invalid amount"
+            status = 403
+        
+        else:
+            self.balance -= amount
+            self.save()
+            message = f"Dear {self.account_name} you have bought airtime of ksh{amount} successfully"
+            status = 200
+        return message, status
+
+            # Account Loan Repayment
+    def buy_airtime(self, amount):
+        if amount <= 0:
+            message = "Invalid amount"
+            status = 403
+
+        elif amount < self.balance:
+            message =  "Insufficient balance"
+            status = 403
+        
+        else:
+            self.balance -= amount
+            self.save()
+            message = f"Dear {self.account_name} you have bought airtime of ksh{amount} successfully"
+            status = 200
+        return message, status
     
 
 class Transaction(models.Model):
@@ -124,6 +214,8 @@ class Reward(models.Model):
     )
     gender = models.CharField(max_length= 15,choices= GENDER_CHOICES)
     reward_points = models.IntegerField()
+
+
 
 
 
